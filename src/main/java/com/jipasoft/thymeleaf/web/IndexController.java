@@ -2,6 +2,7 @@ package com.jipasoft.thymeleaf.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class IndexController {
@@ -79,9 +80,15 @@ public class IndexController {
 
 		return "grid";
 	}
+	
+	// @PostMapping("/login")
+	// public String loginPost() {
+
+		// return "login";
+	// }
 
 	@GetMapping("/login")
-	public String login() {
+	public String loginGet() {
 
 		return "login";
 	}
