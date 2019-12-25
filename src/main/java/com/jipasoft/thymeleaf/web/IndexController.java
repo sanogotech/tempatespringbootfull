@@ -9,7 +9,7 @@ public class IndexController {
 
 	
 
-	@GetMapping({ "/", "/index" })
+	@GetMapping({ "/member", "/index" })
 	public String index() {
 
 		return "index";
@@ -81,13 +81,9 @@ public class IndexController {
 		return "grid";
 	}
 	
-	// @PostMapping("/login")
-	// public String loginPost() {
 
-		// return "login";
-	// }
 
-	@GetMapping("/login")
+	@GetMapping("login")
 	public String loginGet() {
 
 		return "login";
