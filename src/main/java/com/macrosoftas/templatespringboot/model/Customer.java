@@ -1,4 +1,4 @@
-package com.jipasoft.thymeleaf.model;
+package com.macrosoftas.templatespringboot.model;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.jipasoft.thymeleaf.web;
+package com.macrosoftas.templatespringboot.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
