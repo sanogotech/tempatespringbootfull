@@ -11,6 +11,8 @@ CREATE TABLE authorities (
   UNIQUE INDEX authorities_idx_1 (username, authority)
 )
   ENGINE = InnoDb;
+  
+ create unique index ix_auth_username on authorities (username,authority);
 
 
 

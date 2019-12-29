@@ -1,5 +1,11 @@
 package com.macrosoftas.templatespringboot.security;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,9 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+import com.macrosoftas.templatespringboot.model.Customer;
+import com.macrosoftas.templatespringboot.repository.CustomerRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -24,11 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource datasource;
+    
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/home/**","/bower_components/**","/bower.json","/js/**","/less/**", "/dist/**", "/plugins/**").permitAll()
+                .antMatchers("/","*.css","*.js","*.png","*.jpg","*.jpeg","*.gif","/home/**","/bower_components/**","/bower.json","/js/**","/less/**", "/dist/**", "/plugins/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -59,11 +67,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(datasource);
 
         // add new user "user" with password "password" - password will be encrypted
-        if (!userDetailsService.userExists("naruto")) {
+        if (!userDetailsService.userExists("adam@gmail.com")) {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
             authorities.add(new SimpleGrantedAuthority("USER"));
-            User userDetails = new User("jonas", encoder.encode("1234"), authorities);
+           User userDetails = new User("adam@gmail.com", encoder.encode("1234"), authorities);
             userDetailsService.createUser(userDetails);
+            
+            //Create Customer
+            Customer customer = new Customer();
+            customer.setEmail("adam@gmail.com");
+            customer.setFirstname("Adam");
+            customer.setLastname("TOURE");
+            LocalDateTime dateTimeNow = LocalDateTime.now(); 
+            customer.setAddedDate(dateTimeNow);
+            customerRepository.save(customer);
+            
         }
     }
 

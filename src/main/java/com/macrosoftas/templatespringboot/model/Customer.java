@@ -1,24 +1,20 @@
 package com.macrosoftas.templatespringboot.model;
 
-import lombok.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.Date;
+
+
 
 @Entity
-@Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class Customer implements Serializable{
 	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -33,6 +29,48 @@ public class Customer implements Serializable{
     private String email;
 
     @Column(name = "added_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
-    private Date addedDate;
+    private LocalDateTime addedDate;
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public LocalDateTime getAddedDate() {
+		return addedDate;
+	}
+
+	public void setAddedDate(LocalDateTime addedDate) {
+		this.addedDate = addedDate;
+	}
+    
+	
+	
+    
 
 }
